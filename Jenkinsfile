@@ -16,20 +16,6 @@ spec:
         securityContext:
           privileged: true
         tty: true
-        volumeMounts:
-        - name: var-run
-          mountPath: /var/run
-      - name: jnlp
-        securityContext:
-          runAsUser: 0
-          fsGroup: 0
-        volumeMounts:
-        - name: var-run
-          mountPath: /var/run
-        
-    volumes:
-    - emptyDir: {}
-      name: var-run
 """
        }
    }
@@ -45,7 +31,7 @@ spec:
     stages {
         stage('Checkout') {
             steps {
-                container("dind") {
+                container("img") {
                     checkout scm
                 }
             }
@@ -54,13 +40,20 @@ spec:
             steps {
                 container("dind") {
                     sh "docker build -f Dockerfile -t ${params.DOCKER_REPOSITORY} ."
+                }
+            }
+        }
+        stage('Push Image') {
+            steps {
+                container("dind") {
+                    sh "docker login -u ${DOCKER_USR} -p ${DOCKER_PSW}"
+                    sh "docker push ${params.DOCKER_REPOSITORY}"
                     sh "echo ${params.DOCKER_REPOSITORY} > sysdig_secure_images"
                 }
             }
         }
         stage('Scanning Image') {
             steps {
-                // This will always be executed in the JNLP container
                 sysdigSecure engineCredentialsId: 'sysdig-secure-api-credentials', name: 'sysdig_secure_images'
             }
         }
