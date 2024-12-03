@@ -11,7 +11,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install flask
+RUN pip install flask
 COPY app.py /app.py
 EXPOSE 5000 22
 ENTRYPOINT ["python", "./app.py"]
