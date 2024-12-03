@@ -6,11 +6,6 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         python3-pip \
         python3-flask \
-        python3-numpy \
-        openssh-server \
-        build-essential \
-        libssl-dev \
-        libffi-dev \
         python3-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
