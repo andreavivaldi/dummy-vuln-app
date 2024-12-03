@@ -1,7 +1,6 @@
 name: Scan Image
 
-on:
-  workflow_dispatch:
+on: [push]
 
 jobs:
   local-scan:
