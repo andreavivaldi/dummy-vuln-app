@@ -27,10 +27,10 @@ jobs:
       run: cat ${{ steps.scan.outputs.scanReport }}
       
     - name: Display Scan Report custom
-      run: cat ${{ github.workspace }}/test.json
+      run: cat ./test.json
 
     - name: Display Scan Report hardcoded
-      run: cat ${{ github.workspace }}/scan-result.json
+      run: cat ./scan-result.json
    
     - name: Upload SARIF file
       if: success() || failure()
