@@ -21,7 +21,7 @@ jobs:
           sysdig-secure-token: ${{ secrets.SYSDIG_SECURE_TOKEN }}
           sysdig-secure-url: https://eu1.app.sysdig.com
           cli-scanner-version: 1.18.0
-          extra-parameters: "--output-json==./test.json"
+          extra-parameters: "--output-json==./test.json --separate-by-image"
 
     - name: Upload SARIF file
       if: success() || failure()
