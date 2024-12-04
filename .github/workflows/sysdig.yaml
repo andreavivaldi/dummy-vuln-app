@@ -24,7 +24,7 @@ jobs:
           extra-parameters: "--output-json=./test.json"
 
     - name: Display Status
-      run: ls -larth ${{ github.workspace }
+      run: ls -larth ${{ github.workspace }}
    
     - name: Upload SARIF file
       if: success() || failure()
