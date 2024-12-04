@@ -23,14 +23,8 @@ jobs:
           cli-scanner-version: 1.18.0
           extra-parameters: "--output-json=./test.json"
 
-    - name: Display Scan Report
-      run: cat ${{ steps.scan.outputs.scanReport }}
-      
-    - name: Display Scan Report custom
-      run: cat ./test.json
-
-    - name: Display Scan Report hardcoded
-      run: cat ./scan-result.json
+    - name: Display Status
+      run: ls -larth ${{ github.workspace }
    
     - name: Upload SARIF file
       if: success() || failure()
